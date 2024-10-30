@@ -1,4 +1,4 @@
-{-|
+{-
 Module      : Propositions and Typed Terms.
 Description : Module containing basic data types.
 Maintainer  : argh atch esss culling@pm.com

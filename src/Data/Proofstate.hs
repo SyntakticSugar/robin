@@ -1,4 +1,4 @@
-{-|
+{-
 Module      : Proofstate
 Description : Module containing basic data types.
 Maintainer  : argh atch esss culling@pm.com
@@ -32,9 +32,16 @@ module Data.Proofstate where
     type Goal    = Prop
     type Context = [Tterm]
 
+    -- This displays the context across multiple lines.
     prettyContext :: Context -> String
     prettyContext []        = "\n"
     prettyContext (t : ts) = show t ++ "\n" ++ prettyContext ts
+
+    -- This displays the context across a single line.
+    prettyContextLine :: Context -> String
+    prettyContextLine [] = ""
+    prettyContextLine (t : ts) = show t ++ "  " 
+                                        ++ prettyContextLine ts
 
     -- This data is to label steps in a proof. 
     -- To keep a record of the moves in a proof. 
@@ -61,10 +68,11 @@ module Data.Proofstate where
     -- Pretty printing required for Show class. 
     prettyProofState :: ProofState -> String
     prettyProofState (State c g i) = 
-        cstr ++ gstr 
+        cstr ++ divline ++ gstr 
         where
-            cstr = prettyContext c
-            gstr = "|-  " ++ show g
+            cstr    = prettyContext c
+            divline = replicate 100 '-'++ "\n"
+            gstr    = "|-  " ++ show g
     
     instance Show ProofState where
         show :: ProofState -> String
@@ -76,12 +84,6 @@ module Data.Proofstate where
     -- the state at the head of the list
     prettyProof :: Proof -> String
     prettyProof (x : xs) = prettyProofState x    
-
-    displayProof :: Proof -> IO ()
-    displayProof pf =
-        do
-            putStr $ prettyProof pf
-            putStr "\n"
 
     -- Given a context and a goal one can 
     -- begin a proof!

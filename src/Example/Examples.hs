@@ -1,4 +1,4 @@
-{-|
+{-
 Module      : Example library
 Description : Examples for testing the application
 Maintainer  : argh atch esss culling@pm.com

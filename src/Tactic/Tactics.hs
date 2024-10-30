@@ -1,4 +1,4 @@
-{-|
+{-
 Module      : Tactics
 Description : Module for tactics acting on proofs.
 Maintainer  : argh atch esss culling@pm.com
