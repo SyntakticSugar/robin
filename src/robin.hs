@@ -55,4 +55,21 @@ module Robin where
     import Tactic.Tactics
     import Data.Proofstate
     import Example.Examples
+    import Interface.Parser
     import Interface.Display
+
+    ctxt :: Context
+    ctxt = []
+
+    goal :: Goal
+    goal = swap
+
+    proof :: Proof
+    proof = initium ctxt goal
+
+    main :: Proof -> IO ()
+    main pf =
+        do
+            display pf
+            input <- getLine
+            main $ inputTactic input pf

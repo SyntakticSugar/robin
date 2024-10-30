@@ -42,10 +42,11 @@ License     : MIT
 
 module Interface.Display where
 
-    import Data.Proofstate
     import Data.Propterms
-    import Example.Examples
     import Tactic.Tactics
+    import Data.Proofstate
+    import Example.Examples
+
 
     title :: String
     title = "\nRobin :: Proof Assistant for the Simply Typed Lambda Calculus \n\n"
@@ -90,6 +91,7 @@ module Interface.Display where
             putStr $ "Theorem: " ++ prettySequent (last pf)
             putStr "\n\n\n"
             displayProof pf
+            putStr "\n"
             putStr menu
             putStr "\n"
 

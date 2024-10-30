@@ -32,6 +32,9 @@ module Tactic.Tactics where
 
     type Tactic = Proof -> Proof
 
+    identity :: Tactic
+    identity pf = pf
+
     -- Intro applies the deduction theorem.
     -- introState generates the new state. 
     introState :: Char -> Prop -> ProofState -> ProofState
