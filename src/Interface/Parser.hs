@@ -28,13 +28,13 @@ License     : MIT
 
         This will be called by the user
 
-            Intro <<char>>
+            Intro <<string>>
     
     [ ] :: Apply
 
         This will be called by the user
             
-            Apply <<char>> <<char>>
+            Apply <<string>> <<string>>
 
 -}
 
@@ -46,12 +46,13 @@ module Interface.Parser where
     import Example.Examples
     import Interface.Display
 
-    inputTactic :: String -> Tactic
-    inputTactic input =
-        if cmd == "Intro"
-            then intro term
-            else identity
+    inputToTactic :: String -> Tactic
+    inputToTactic input 
+        | cmd == "Intro" = intro term
+        | cmd == "Apply" = identity
+        | cmd == "QED"   = identity
+        | otherwise      = identity
         where
             inputWords  = words input
             cmd         = head inputWords
-            term        = head (inputWords !! 1)
+            term        = tail inputWords

@@ -37,7 +37,7 @@ module Tactic.Tactics where
 
     -- Intro applies the deduction theorem.
     -- introState generates the new state. 
-    introState :: Char -> Prop -> ProofState -> ProofState
+    introState :: String -> Prop -> ProofState -> ProofState
     introState t (Imp a c) previous = State newCtx newGoal newInference
         where
             currentCtx          = getContext previous
@@ -52,14 +52,25 @@ module Tactic.Tactics where
     introState _ _ previous = previous
    
    -- Intro wraps the previous function up to work on proofs. 
-    intro :: Char -> Tactic
-    intro c pf = if isImp goal
-                    then introState c goal current : pf
-                    else pf
+    intro :: [String] -> Tactic
+    intro c pf = 
+        if isImp goal
+            then introState name goal current : pf
+            else pf
         where
+            name    = head c
             current = head pf
             goal    = getGoal current
 
+    -- Apply state will take two names of terms. 
+    --  * Check if they're in the context
+    --  * Check if the application makes type sense 
+    --  * Update the ProofState accordingly
+    --applyState :: String -> String -> ProofState -> ProofState
+
+
+    -- apply :: [String] -> Tactic
+    -- apply terms pf =
     
 
 

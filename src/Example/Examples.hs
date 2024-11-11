@@ -53,3 +53,24 @@ module Example.Examples where
 
     example :: Proof
     example = initium [] swap
+
+    hp :: Tterm
+    hp = Vart "hp" p
+
+    hq :: Tterm 
+    hq = Vart "hq" q
+
+    hr :: Tterm 
+    hr = Vart "hr" r
+
+    hi :: Tterm
+    hi = Vart "hi" i
+
+    hk :: Tterm
+    hk = Vart "hk" k
+
+    comp :: Tterm
+    comp = Vart "comp" b
+
+    contest :: Context
+    contest = [hp, hq, hr, hi, hk]

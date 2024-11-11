@@ -43,12 +43,23 @@ module Data.Proofstate where
     prettyContextLine (t : ts) = show t ++ "  " 
                                         ++ prettyContextLine ts
 
+    -- Given a string, name of term, determine if there 
+    -- there is an element of the context with that name. 
+    inContext :: String -> Context -> Maybe Tterm
+    inContext name []                    = Nothing
+    inContext name ((Vart str typ) : ts) = 
+        if name == str
+            then Just $ Vart str typ
+            else inContext name ts
+    inContext name (t : ts)              = inContext name ts
+
+
     -- This data is to label steps in a proof. 
     -- To keep a record of the moves in a proof. 
     data Inference =
         Start
         | ImpElim
-        | ImpIntro Char
+        | ImpIntro String
         | QED
 
     -- Steps in proofs are wrapped up as follows:

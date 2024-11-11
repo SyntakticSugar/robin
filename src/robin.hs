@@ -72,4 +72,4 @@ module Robin where
         do
             display pf
             input <- getLine
-            main $ inputTactic input pf
+            main $ inputToTactic input pf
